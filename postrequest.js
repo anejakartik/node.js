@@ -22,15 +22,7 @@ data['accountType'] = j;
 $.ajax({
        url:"http://127.0.0.1:8000/product-track/",
        type:"GET",
-       data:data,
-
-       success:function(response) {
-
-        //alert('he')
-      },
-      error:function(){
-
-      }
+       data:data
 
      });
 }
