@@ -1,28 +1,8 @@
-
-
-var i;
-data = {};
-
-for (i = 0; i < warpspd.length; i++){
-  if (!(warpspd[i][0].localeCompare('track'))){
-    data[warpspd[i][1]] = warpspd[i][2];
-
-  }
-  else if (!(warpspd[i][0].localeCompare('identify'))){
-    data[warpspd[i][1]] = warpspd[i][2]
-  }
-}
-
-if (!( JSON.stringify(data) === '{}')){
-r = document.getElementById('warp-tracker').getAttribute('data-site-id');
-j = document.getElementById('warp-tracker').getAttribute('accountType');
-data['merchant_id'] = r;
-data['accountType'] = j;
-
-$.ajax({
-       url:"http://127.0.0.1:8000/product-track/",
-       type:"GET",
-       data:data
-
-     });
-}
+chrome.webRequest.onHeadersReceived.addListener(details => {
+  const responseHeaders = details.responseHeaders.map(item => {
+    if (item.name.toLowerCase() === 'access-control-allow-origin') {
+      item.value = '*'
+    }
+  })
+  return { responseHeaders };
+}, {urls: ['<all_urls>']}, ['blocking', 'responseHeaders', 'extraHeaders'])
