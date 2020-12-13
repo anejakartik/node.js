@@ -1,6 +1,6 @@
 var i;
 data = {};
-console.log(warpspd);
+
 for (i = 0; i < warpspd.length; i++){
   if (!(warpspd[i][0].localeCompare('track'))){
     data[warpspd[i][1]] = warpspd[i][2];
@@ -14,20 +14,19 @@ for (i = 0; i < warpspd.length; i++){
 if (!( JSON.stringify(data) === '{}')){
 r = document.getElementById('warp-tracker').getAttribute('data-site-id');
 j = document.getElementById('warp-tracker').getAttribute('accountType');
-data['merchant_id'] = r;
-data['accountType'] = j;
-console.log(data);
- fetch("https://example.com/api/request", {
-            method: 'POST',
-            body: JSON.stringify(data),
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-                "Accept": 'application/json',
-            }
-        })
-    .then((data) => data.json())
-    .then((resp) => console.log(resp))
-    .catch((err) => console.log(err))
-}
 
+data['merchant_id'] = parseInt(r);
+data['accountType'] = j;
+data['cart_id'] = '23234'
+console.log(data);
+
+var u = "http://af787bc2a7bfa42e38ed91dc51fcbab9-980046495.ap-southeast-1.elb.amazonaws.com:5000/getcart_touch_points";
+x = new XMLHttpRequest();
+x.open("POST", u, !0);
+x.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+x.onreadystatechange = function() {  if (x.readyState == XMLHttpRequest.DONE) {
+        console.log(x.responseText);
+    }};
+x.send(JSON.stringify(data));
+
+}
