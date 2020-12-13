@@ -1,11 +1,3 @@
-chrome.webRequest.onHeadersReceived.addListener(details => {
-  const responseHeaders = details.responseHeaders.map(item => {
-    if (item.name.toLowerCase() === 'access-control-allow-origin') {
-      item.value = '*'
-    }
-  })
-  return { responseHeaders };
-
 var i;
 data = {};
 console.log(warpspd);
@@ -25,20 +17,20 @@ j = document.getElementById('warp-tracker').getAttribute('accountType');
 data['merchant_id'] = r;
 data['accountType'] = j;
 console.log(data);
-$.ajax({
-       url:"http://127.0.0.1:8000/product-track/",
-       type:"GET",
-       data:data,
+let user = {
+  name: 'John',
+  surname: 'Smith'
+};
 
-       success:function(response) {
+let response = await fetch('/article/fetch/post/user', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8'
+  },
+  body: JSON.stringify(user)
+});
 
-        //alert('he')
-      },
-      error:function(){
-
-      }
-
-     });
+let result = await response.json();
+alert(result.message);
 }
 
-}, {urls: ['<all_urls>']}, ['blocking', 'responseHeaders', 'extraHeaders'])
