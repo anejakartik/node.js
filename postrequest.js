@@ -17,20 +17,17 @@ j = document.getElementById('warp-tracker').getAttribute('accountType');
 data['merchant_id'] = r;
 data['accountType'] = j;
 console.log(data);
-let user = {
-  name: 'John',
-  surname: 'Smith'
-};
-
-let response = await fetch('/article/fetch/post/user', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json;charset=utf-8'
-  },
-  body: JSON.stringify(user)
-});
-
-let result = await response.json();
-alert(result.message);
+ fetch("https://example.com/api/request", {
+            method: 'POST',
+            body: JSON.stringify(data),
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                "Accept": 'application/json',
+            }
+        })
+    .then((data) => data.json())
+    .then((resp) => console.log(resp))
+    .catch((err) => console.log(err))
 }
 
