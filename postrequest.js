@@ -26,7 +26,9 @@ var u = "http://af787bc2a7bfa42e38ed91dc51fcbab9-980046495.ap-southeast-1.elb.am
 x = new XMLHttpRequest();
 x.open("POST", u, !0);
 x.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-x.onreadystatechange = handleStateChange;
+x.onreadystatechange = function() {  if (x.readyState == XMLHttpRequest.DONE) {
+        console.log(x.responseText);
+    }};
 x.send(JSON.stringify(data));
 
 }
