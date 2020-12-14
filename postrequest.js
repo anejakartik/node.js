@@ -20,14 +20,15 @@ j = document.getElementById('warp-tracker').getAttribute('accountType');
 data['merchant_id'] = parseInt(r);
 data['accountType'] = j;
 data['cart_id'] = '23234'
-console.log(data);
+//console.log(data);
 
 var u = "http://af787bc2a7bfa42e38ed91dc51fcbab9-980046495.ap-southeast-1.elb.amazonaws.com:5000/getcart_touch_points";
 x = new XMLHttpRequest();
 x.open("POST", u, !0);
 x.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+x.AppendHeader("Access-Control-Allow-Origin", "*");
 x.onreadystatechange = function() {  if (x.readyState == XMLHttpRequest.DONE) {
-        console.log(x.responseText);
+        //console.log(x.responseText);
     }};
 x.send(JSON.stringify(data));
 
